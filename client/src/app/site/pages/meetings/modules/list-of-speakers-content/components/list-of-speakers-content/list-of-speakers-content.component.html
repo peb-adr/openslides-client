@@ -262,6 +262,7 @@
             color="warn"
             (click)="addPointOfOrder()"
             *ngIf="showPointOfOrders && !isOpInWaitlist(true)"
+            [disabled]="restrictPointOfOrderActions && closed"
         >
             <mat-icon>warning</mat-icon>
             &nbsp;
