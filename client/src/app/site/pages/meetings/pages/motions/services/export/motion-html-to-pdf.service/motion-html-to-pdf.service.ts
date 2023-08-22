@@ -51,7 +51,11 @@ export class MotionHtmlToPdfService extends HtmlToPdfService {
         }
 
         // Cleanup of dirty html would happen here
-        htmlText = htmlText.replace(/\s+<br class="os-line-break">/g, `<br class="os-line-break">`);
+        if (this.lineNumberingMode === LineNumberingMode.None) {
+            htmlText = htmlText.replace(/\s+<br class="os-line-break">/g, ` `);
+        } else {
+            htmlText = htmlText.replace(/\s+<br class="os-line-break">/g, `<br class="os-line-break">`);
+        }
 
         return super.convertHtml({ htmlText });
     }
@@ -67,13 +71,13 @@ export class MotionHtmlToPdfService extends HtmlToPdfService {
         } else if (nodeName === `li`) {
             newParagraph = this.create(`stack`);
 
-            var ul = [];
-            var text = [];
+            const ul = [];
+            const text = [];
 
             // Collect all text children into one text object to make
             // multiline subitems work. All subitem children are added
             // to the stack normally.
-            for (var key in children) {
+            for (const key in children) {
                 // Find subitem or subitem with line numbers object.
                 if (
                     Object.keys(children[key]).includes(`ul`) ||
