@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 LOL
+=======
+
+CHANGE 1
+>>>>>>> 51aaaa19d (CHANGE 1 (#3))
 
 # OpenSlides Client
 
